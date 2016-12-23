@@ -115,11 +115,16 @@ public class ReserveFragment2 extends Fragment implements AdapterView.OnItemClic
                                 editor.putBoolean("isReserveSucceed", true);
                                 editor.apply();
 
-                                Toast toast = new Toast(getActivity());
-                                toast.setDuration(Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.CENTER, 0,0);
-                                toast.setView(customToast);
-                                toast.show();
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast toast = new Toast(getActivity());
+                                        toast.setDuration(Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0,0);
+                                        toast.setView(customToast);
+                                        toast.show();
+                                    }
+                                });
                                 Intent backToMain = new Intent(getActivity(),MainActivity.class);
                                 startActivity(backToMain);
                             } catch (JSONException e) {

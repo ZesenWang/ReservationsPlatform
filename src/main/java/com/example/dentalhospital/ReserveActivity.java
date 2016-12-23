@@ -1,7 +1,9 @@
 package com.example.dentalhospital;
 
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -42,8 +44,10 @@ public class ReserveActivity extends AppCompatActivity{
         transaction.commit();
 
         reservationInfo = new JSONObject();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         try {
             reservationInfo.put("hospital",getIntent().getStringExtra("hospital"));
+            reservationInfo.put("id", preferences.getString("sId", ""));
         } catch (JSONException e) {
             e.printStackTrace();
         }

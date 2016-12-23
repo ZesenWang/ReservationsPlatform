@@ -42,7 +42,7 @@
             <TextView
                 android:id="@+id/waitTime"
                 android:textColor="#ffffff"
-                android:text="预计排队时间\n\n0"
+                android:text="预计排队时间\n\n"
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -50,7 +50,7 @@
             <TextView
                 android:id="@+id/queueNumber"
                 android:textColor="#ffffff"
-                android:text="你的排队号码\n\n0"
+                android:text="你的排队号码\n\n"
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -58,7 +58,7 @@
             <TextView
                 android:id="@+id/reservationType"
                 android:textColor="#ffffff"
-                android:text="你的挂号类型\n\n0"
+                android:text="你的挂号类型\n\n"
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -82,7 +82,7 @@
             android:layout_below="@+id/textView18"
             android:layout_centerHorizontal="true"
             android:id="@+id/peopleNumber"
-            android:text="38"
+            android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="65sp" />
 

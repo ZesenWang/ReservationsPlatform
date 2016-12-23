@@ -159,12 +159,17 @@ public class ReserveFragment3 extends Fragment implements View.OnClickListener{
                                 editor.putString("doctor",doctorArray[activity.reservationInfo.getInt("doctor")]);
                                 editor.putBoolean("isReserveSucceed", true);
                                 editor.apply();
-
-                                Toast toast = new Toast(getActivity());
-                                toast.setDuration(Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.CENTER, 0,0);
-                                toast.setView(customToast);
-                                toast.show();
+                                //// TODO: 2016/12/23  
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast toast = new Toast(getActivity());
+                                        toast.setDuration(Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0,0);
+                                        toast.setView(customToast);
+                                        toast.show();
+                                    }
+                                });
 
                                 Intent backToMain = new Intent(getActivity(),MainActivity.class);
                                 startActivity(backToMain);

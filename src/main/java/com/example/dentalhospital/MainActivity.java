@@ -47,8 +47,7 @@ import java.util.ArrayList;
 public class MainActivity extends FragmentActivity implements View.OnClickListener{
 
     private static final String TAG = "mainactivity";
-    //// TODO: 2016/12/23 记得在这里添加服务器地址
-    public static final String SERVER_URL = "";
+    public static String SERVER_URL = "";
     TabButton button,button2,button3,button4;
     Tab1Fragment tab1Fragment;
     Tab2Fragment tab2Fragment;
@@ -85,6 +84,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             Intent intent = new Intent(this, WelcomeActivity.class);
             startActivityForResult(intent, 0);
         }
+        SERVER_URL = preferences.getString("serverURL", "");
         //获取位置信息和附近的医院信息
         requestPOI();
         new MyLocation(this, tab1Fragment);
@@ -97,9 +97,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         @Override
         public void onReceive(Context context, Intent intent) {
+
             String []doctor = getResources().getStringArray(R.array.doctor_names);
             String msg = intent.getStringExtra("msg");
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+
             int waitTime = preferences.getInt("waitTime",-1);
             int peopleNumber = preferences.getInt("peopleNumber", -1);
             int queueNumber = preferences.getInt("queueNumber", -1);
@@ -127,7 +129,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onResume();
         mapView.onResume();
         // TODO: 2016/12/17 如果System.currentTimeMillis()不对，试试SystemClock.elapsedRealtime()
-        manager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 5000, pendingIntent);
+        manager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000, pendingIntent);
         //getActionBar().show();
     }
 

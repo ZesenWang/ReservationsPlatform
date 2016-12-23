@@ -1,16 +1,20 @@
 package com.example.dentalhospital;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -57,12 +61,15 @@ public class WelcomeActivity extends AppCompatActivity implements AdapterView.On
     ProgressDialog dialog;
     JSONObject object;
     JSONHelper helper;
+    EditText editText;
+    AlertDialog mAlertDialog;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             helper.interact(MainActivity.SERVER_URL + "/SignUpServlet");
         }
     };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +77,27 @@ public class WelcomeActivity extends AppCompatActivity implements AdapterView.On
         setContentView(R.layout.welcomeactivity);
         mTencent = Tencent.createInstance(APP_ID, this.getApplicationContext());
         relativeLayout = (RelativeLayout)findViewById(R.id.relativeLayout);
+
+        editText = new EditText(WelcomeActivity.this);
+        editText.setWidth(500);
+
+        final SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        boolean isSetServer = preferences.getBoolean("isSetServer", false);
+        if(!isSetServer) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("请输入服务器URL：")
+                    .setView(editText)
+                    .setPositiveButton("好的", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            MainActivity.SERVER_URL = editText.getText().toString();
+                            preferences.edit().putBoolean("isSetServer", true).apply();
+                        }
+                    })
+                    .setNegativeButton("我就看看，不说话", null);
+            mAlertDialog = builder.create();
+            mAlertDialog.show();
+        }
     }
 
     @Override
@@ -114,13 +142,15 @@ public class WelcomeActivity extends AppCompatActivity implements AdapterView.On
         final String sInsuranceId = insuranceId.getText().toString();
         final int genderCode = gender.getCheckedRadioButtonId();
         byte[] encriptedPassword = null;
-        if(sPassword != null){
+        if(!sPassword.equals("")){
             encriptedPassword = encript(sPassword);
         }
-        //Toast.makeText(this, preferences.getString("sName","none"), Toast.LENGTH_SHORT).show();
         object = new JSONObject();
         try {
-            object.put("sPassword", encriptedPassword);
+            if(encriptedPassword == null)
+                object.put("sPassword","");
+            else
+                object.put("sPassword", encriptedPassword);
             object.put("sName",sName);
             object.put("sId",sId);
             object.put("sInsuranceId",sInsuranceId);
@@ -147,9 +177,14 @@ public class WelcomeActivity extends AppCompatActivity implements AdapterView.On
                         return;
                     }
                     try {
-                        if(result.getBoolean("isSucced")){
+                        if(result.getBoolean("isSucceed")){
                             dialog.dismiss();
-                            Toast.makeText(WelcomeActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(WelcomeActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(WelcomeActivity.this);
                             SharedPreferences.Editor editor = preferences.edit();
                             editor.putString("sName",sName);
@@ -158,6 +193,7 @@ public class WelcomeActivity extends AppCompatActivity implements AdapterView.On
                             editor.putInt("genderCode",genderCode);
                             editor.putString("insuranceCode",insuranceIdCode);
                             editor.putBoolean("isSignIn", true);
+                            editor.putString("serverURL", MainActivity.SERVER_URL);
                             editor.apply();
                             finish();
                         }else{

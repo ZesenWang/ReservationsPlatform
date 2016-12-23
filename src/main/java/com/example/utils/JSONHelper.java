@@ -54,6 +54,7 @@ public class JSONHelper {
                     conn.setDoInput(true);
                     conn.setDoOutput(true);
 
+                    conn.connect();
                     out = conn.getOutputStream();
                     out.write(object.toString().getBytes());
                     Log.i("json","response code:"+conn.getResponseCode());
@@ -66,7 +67,7 @@ public class JSONHelper {
                     while(reader.read(jsonString) != -1){
                         stringBuilder.append(jsonString);
                     }
-                    Log.i("json","raw json string:"+stringBuilder.toString());
+                    Log.i("json","raw JSON string:"+stringBuilder.toString());
                     result = new JSONObject(stringBuilder.toString());
 
                 } catch (JSONException e) {
