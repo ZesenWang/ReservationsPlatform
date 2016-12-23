@@ -14,6 +14,9 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -37,6 +40,7 @@ import com.example.fragment.Tab1Fragment;
 import com.example.fragment.Tab2Fragment;
 import com.example.fragment.Tab3Fragment;
 import com.example.fragment.Tab4Fragment;
+import com.example.service.CheckIntentService;
 import com.example.service.CheckService;
 import com.example.utils.ImageHelper;
 import com.example.utils.MyLocation;
@@ -62,6 +66,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     PendingIntent pendingIntent;
     AlarmManager manager;
     public ImageHelper imageHelper;
+    Intent intent;
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            //super.handleMessage(msg);
+            startService(intent);
+            handler.sendEmptyMessageDelayed(0x123, 3000);
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,35 +102,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         requestPOI();
         new MyLocation(this, tab1Fragment);
         //启动一个定时执行的service，用于检查挂号信息
-        Intent intent = new Intent(this, CheckService.class);
-        pendingIntent = PendingIntent.getService(this, 0, intent, 0);
-        manager = (AlarmManager)getSystemService(Service.ALARM_SERVICE);
-    }
-    public class ActivityReceiver extends BroadcastReceiver{
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            String []doctor = getResources().getStringArray(R.array.doctor_names);
-            String msg = intent.getStringExtra("msg");
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-
-            int waitTime = preferences.getInt("waitTime",-1);
-            int peopleNumber = preferences.getInt("peopleNumber", -1);
-            int queueNumber = preferences.getInt("queueNumber", -1);
-
-            if(msg.equals("reset")){
-                tab4Fragment.waitTime.setText("预计排队时间\\n\\n分钟");
-                tab4Fragment.peopleNumber.setText("");
-                tab4Fragment.queueNumber.setText("你的排队号码\n\n");
-                tab4Fragment.reservationType.setText("你的挂号类型\n\n");
-            }else if(msg.equals("update")){
-                tab4Fragment.waitTime.setText("预计排队时间\\n\\n"+waitTime+"分钟");
-                tab4Fragment.peopleNumber.setText(""+peopleNumber);
-                tab4Fragment.queueNumber.setText("你的排队号码\n\n"+queueNumber);
-                tab4Fragment.reservationType.setText("你的挂号类型\n\n"+doctor[preferences.getInt("doctor",-1)]);
-            }
-        }
+        intent = new Intent(this, CheckIntentService.class);
+        //pendingIntent = PendingIntent.getService(this, 0, intent, 0);
+        //manager = (AlarmManager)getSystemService(Service.ALARM_SERVICE);
+        handler.sendEmptyMessageDelayed(0x123, 5000);
     }
     public void requestPOI(){
         poiSearch = PoiSearch.newInstance();
@@ -129,7 +117,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onResume();
         mapView.onResume();
         // TODO: 2016/12/17 如果System.currentTimeMillis()不对，试试SystemClock.elapsedRealtime()
-        manager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000, pendingIntent);
+        //manager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000, pendingIntent);
         //getActionBar().show();
     }
 
@@ -137,7 +125,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     protected void onPause() {
         super.onPause();
         mapView.onPause();
-        manager.cancel(pendingIntent);
+        //manager.cancel(pendingIntent);
     }
 
     @Override

@@ -102,10 +102,12 @@
         <service
             android:name="com.example.service.CheckService"
             android:enabled="true"
-            android:exported="true"></service>
-        <receiver android:name="com$example$dentalhospital$MainActivity$ActivityReceiver">
+            android:exported="false"></service>
+        <service android:name="com.example.service.CheckIntentService"/>
+        <receiver android:name="com.example.broadcast.ActivityReceiver">
             <intent-filter>
                 <action android:name="com.example.action.UPDATE_UI"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </receiver>
     </application>
