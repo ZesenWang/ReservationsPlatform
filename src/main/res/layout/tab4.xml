@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="@drawable/mainactivity_fragment4_background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="排队状态"
+            android:textColor="#ffffff"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <View
+            android:id="@+id/thinring"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/mainactivity_fragment4_whitering"
+            android:layout_centerHorizontal="true"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_below="@id/textView"/>
+        <View
+            android:layout_alignTop="@id/thinring"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/mainactivity_fragment4_bigwhitering"
+            android:layout_width="260dp"
+            android:layout_height="260dp"
+            android:id="@+id/view" />
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="40dp">
+            <TextView
+                android:id="@+id/waitTime"
+                android:textColor="#ffffff"
+                android:text="预计排队时间\n\n0"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/queueNumber"
+                android:textColor="#ffffff"
+                android:text="你的排队号码\n\n0"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/reservationType"
+                android:textColor="#ffffff"
+                android:text="你的挂号类型\n\n0"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="在你前面还有"
+            android:textColor="#ffffff"
+            android:layout_alignTop="@+id/view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="78dp"
+            android:id="@+id/textView18" />
+
+        <TextView
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView18"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/peopleNumber"
+            android:text="38"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="65sp" />
+
+        <TextView
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/peopleNumber"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/textView20"
+            android:textSize="14sp"
+            android:text="位病人在治疗" />
+
+        <com.example.utils.RingProgressBar
+            android:layout_width="260dp"
+            android:layout_height="260dp"
+            android:id="@+id/ringBar"
+            android:layout_alignTop="@+id/view"
+            android:layout_alignStart="@+id/view" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/cancel"
+        android:textColor="#ffffff"
+        android:text="取消预约"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#ff0000"/>
+</LinearLayout>

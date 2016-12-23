@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v4.view.ViewPager
+        android:layout_alignParentTop="true"
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"></android.support.v4.view.ViewPager>
+    <ImageView
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/imageView3"
+        android:layout_below="@id/viewPager"
+        android:src="@drawable/cancer"
+        />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textColor="#ffffff"
+        android:text="在艰难的抗癌斗争里，如何尽力才不会后悔？"
+        android:id="@+id/textView4"
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:src="@drawable/doctor"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageView4"
+        android:layout_below="@+id/imageView3"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="项栋梁"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/textView4"
+        android:layout_toEndOf="@+id/imageView4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="科普作家，前媒体记者"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/textView5"
+        android:layout_toEndOf="@+id/imageView4" />
+
+</RelativeLayout>

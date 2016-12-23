@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tab1_spinner_item">
+        <item >综合医院</item>
+        <item>专科医院</item>
+        <item>卫生服务站</item>
+    </string-array>
+    <string-array name="tab1_spinner2_item">
+        <item>四级甲等</item>
+        <item>三级甲等</item>
+        <item>三级乙等</item>
+        <item>二级甲等</item>
+        <item>二级乙等</item>
+    </string-array>
+    <string-array name="signin_spinner">
+        <item>省医保</item>
+        <item>市医保</item>
+        <item>市民卡</item>
+        <item>农保</item>
+    </string-array>
+    <string-array name="signin_spinner_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="department">
+        <item>中医科</item>
+        <item>中西医结合科</item>
+        <item>外科</item>
+        <item>推拿针灸科</item>
+    </string-array>
+    <string-array name="doctor_names">
+        <item>普通号</item>
+        <item>专家号-余勤</item>
+        <item>专家号-胡正刚</item>
+        <item>专家号-董襄国</item>
+        <item>专家号-张卓文</item>
+        <item>专家号-杨米雄</item>
+        <item>专家号-金国梁</item>
+        <item>专家号-王伟</item>
+        <item>专家号-徐珊</item>
+        <item>专家号-俞景茂</item>
+        <item>专家号-鲁贤昌</item>
+        <item>专家号-陈培丰</item>
+        <item>专家号-李虹</item>
+        <item>专家号-江依法</item>
+    </string-array>
+</resources>

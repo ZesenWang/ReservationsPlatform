@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:clickable="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <GridView
+
+        android:numColumns="3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gridView"
+        android:layout_alignParentTop="true"></GridView>
+    <FrameLayout
+        android:layout_below="@id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <GridView
+        android:layout_below="@id/gridView"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/gridView2"
+        android:numColumns="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        </GridView>
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/gridView"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请下拉刷新"
+            android:id="@+id/refresh"/>
+    </FrameLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="个人信息">
+        <EditTextPreference
+            android:title="预约管理"
+            android:summary="看看你个弱鸡生病了几次"
+            android:singleLine="false" />
+        <EditTextPreference
+            android:title="修改密码"
+            android:summary="拿个本子记着别再忘了"/>
+        <PreferenceScreen
+            android:title="账号管理"
+            android:summary="修改身份证/年龄/医保卡等">
+            <EditTextPreference
+                android:title="身份证号"
+                android:summary="修改身份证号码"
+                android:key="sId"/>
+            <ListPreference
+                android:title="医保卡类型"
+                android:summary="修改医保卡类型 "
+                android:key="insuranceCode"
+                android:entries="@array/signin_spinner"
+                android:entryValues="@array/signin_spinner_values"/>
+            <EditTextPreference
+                android:title="医保卡号"
+                android:summary="修改医保卡号码"
+                android:key="sInsuranceId"/>
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="关于">
+        <Preference
+            android:title="用户帮助"
+            android:summary="其实这里什么也没有"/>
+        <Preference
+            android:title="关于我们"
+            android:summary="不接受任何建议"/>
+    </PreferenceCategory>
+    <com.example.utils.SignOutPreference
+        android:title="退出登陆"
+        android:key="isSignIn" />
+</PreferenceScreen>

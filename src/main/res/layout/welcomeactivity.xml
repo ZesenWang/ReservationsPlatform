@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativeLayout"
+    >
+    <TextView
+        android:text="欢迎"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="99dp"
+        android:id="@+id/textView11"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="50sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:text="使用挂号预约综合平台"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView12"
+        android:layout_below="@id/textView11"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:text="用户名"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView13"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@id/textView12"
+        android:layout_marginTop="20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="16sp" />
+    <EditText
+        android:background="#00ffffff"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="身份证号/医保卡号"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_below="@+id/textView12"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/textView13"
+        android:layout_marginLeft="10dp"
+        android:selectAllOnFocus="false" />
+    <View
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:background="#cccccc"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/editText"/>
+    <EditText
+        android:layout_alignLeft="@id/editText"
+        android:background="#00ffffff"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:hint="请输入密码"
+        android:layout_below="@+id/editText"
+        android:layout_marginTop="10dp"
+        android:id="@+id/editText2" />
+    <View
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:background="#cccccc"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/editText2"/>
+    <TextView
+        android:text="密码"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/textView13"
+        android:layout_alignBaseline="@id/editText2"
+        android:id="@+id/textView14"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="16sp" />
+    <Button
+        android:clickable="false"
+        android:text="登陆"
+        android:width="300dp"
+        android:background="#3385ff"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/button7" />
+
+    <Button
+        android:onClick="onSignUp"
+        android:text="注册新用户"
+        android:width="300dp"
+        android:background="#00cccccc"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button8"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/button7" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/wechat"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageView10" />
+
+    <ImageView
+        android:onClick="onQQSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/qqchat"
+        android:layout_alignBottom="@id/imageView10"
+        android:layout_marginRight="40dp"
+        android:layout_toLeftOf="@id/imageView10"
+        android:id="@+id/imageView9" />
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/facebook"
+        android:layout_alignBottom="@id/imageView10"
+        android:layout_toRightOf="@id/imageView10"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/imageView11" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="其他登陆方式"
+        android:layout_above="@id/imageView10"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">预约挂号平台</string>
+    <string name="h">浙医二院（浙江大学医学院附属第二医院）创建于1869年</string>
+    <string name="h2">其前身为英国圣公会在华设立的杭州广济医院，</string>
+    <string name="h3">1885-1925年医院附设的广济医校是国内最早的医校之一。</string>
+    <string name="h4">经过130多年的建设与发展，目前浙医二院成为一所具有鲜明专科特色的现代化研究型综合性医院。</string>
+    <string name="h5"> 浙医二院开放床位1900张，年门急诊量约160.68万人次，住院病人超过4.82万人次；</string>
+    <string name="h6">手术2.55万台，医疗用房超过15.5万方，建有附设急救直升机停机坪的现代化脑科中心</string>
+    <string name = "doctor_jiangyifa">医生简介：\n\t\t\t擅长于中西医结合治疗各种疑难杂症，对于心脑血管疾病、感染性疾病及肿瘤等具有较丰富的临床经验</string>
+</resources>
