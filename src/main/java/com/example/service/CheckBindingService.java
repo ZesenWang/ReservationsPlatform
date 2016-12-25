@@ -1,10 +1,11 @@
 package com.example.service;
 
-import android.app.IntentService;
-import android.content.Context;
+import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.os.Binder;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,30 +16,49 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by wangz on 2016/12/23.
+ * Created by wangz on 2016/12/25.
  */
 
-public class CheckIntentService extends IntentService {
-    private static final String TAG = "CheckIntentService";
-    private static final String UPDATE_UI_BROAD = "com.example.action.UPDATE_UI";
-
-    public CheckIntentService(){
-        // TODO: 2016/12/23 give a parameter
-        super("HelloWorkerThread");
+public class CheckBindingService extends Service {
+    private static final String TAG = "CheckBindingService";
+    MyBinder binder = new MyBinder();
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        checkout();
+        return binder;
     }
     @Override
-    protected void onHandleIntent(Intent intent) {
-        Log.i(TAG, "service is running");
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        checkout();
+        return super.onStartCommand(intent, flags, startId);
+    }
+    public interface UIOperations{
+        void resetUI();
+        void updateUI();
+    }
+    public class MyBinder extends Binder {
+        UIOperations operations;
+        public void checkoutInService(){
+            checkout();
+        }
+        public void setUIOperations(UIOperations operations){
+            this.operations = operations;
+        }
+    }
 
+    public void checkout(){
+        Log.i(TAG, "onStartCommand: service is running");
         final SharedPreferences preferences = getSharedPreferences("waitInfo", MODE_PRIVATE);
-        SharedPreferences infoPreference = PreferenceManager.getDefaultSharedPreferences(CheckIntentService.this);
-        //如果没有预约就直接返回
-        if(!preferences.getBoolean("isReserveSucceed", false))
+
+        if(!preferences.getBoolean("isReserveSucceed", false)) {
+            Log.i(TAG, "checkout: No reservation Quit checkout");
             return;
-        //放入请求信息
+        }
+
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("id", infoPreference.getString("sId", ""));
+            jsonObject.put("id", preferences.getString("sId", ""));
             jsonObject.put("isCancel", preferences.getBoolean("isCancel", false));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -48,43 +68,43 @@ public class CheckIntentService extends IntentService {
         helper.setOnReceiveJSONListener(new JSONHelper.OnReceiveJSONListener() {
             @Override
             public void onReceive(JSONObject result) {
-                //没收到结果就返回
                 if(result == null)
                     return;
-                //收到结果就更新UI
-                Intent intent = new Intent(UPDATE_UI_BROAD);
+                //Intent intent = new Intent("com.example.action.UPDATE_UI");
                 try {
                     int queueNumber = result.getInt("queueNumber");
                     int waitTime = result.getInt("waitTime");
                     int peopleNumber = result.getInt("peopleNumber");
-                    //排队号码是-1说明挂号取消了
                     if(queueNumber == -1){
-                        //把所以数据恢复初始值
+                        Log.i(TAG, "onReceive: queueNumber=-1");
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putBoolean("isReserveSucceed",false);
                         editor.putBoolean("isCancel", false);
                         editor.putInt("queueNumber",-1);
                         editor.putInt("waitTime", -1);
                         editor.putInt("peopleNumber", -1);
-                        editor.apply();
-                        //告诉广播接收者要重置UI
-                        intent.putExtra("msg","reset");
+                        editor.commit();
+                        //使用intent发送广播，放弃的方法
+                        //intent.putExtra("msg","reset");
+                        //调用主线程实现的接口里的方法
+                        binder.operations.resetUI();
                     }
                     else {
-                        //这个分支说明正常收到消息，应该更新UI
+                        Log.i(TAG, "onReceive: queueNumber= 1");
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putInt("queueNumber", queueNumber);
                         editor.putInt("waitTime", waitTime);
                         editor.putInt("peopleNumber", peopleNumber);
-                        editor.apply();
-                        //告诉广播接收者更新UI
-                        intent.putExtra("msg","update");
+                        editor.commit();
+                        //使用intent发送广播，放弃的方法
+                        //intent.putExtra("msg","update");
+                        //调用主线程实现的接口里的方法
+                        binder.operations.updateUI();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //发送广播让主线程更新UI
-                sendBroadcast(intent);
+                //sendBroadcast(intent);
             }
         });
         helper.interact(MainActivity.SERVER_URL + "/CheckServlet");

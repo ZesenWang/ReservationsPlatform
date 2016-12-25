@@ -82,6 +82,8 @@ public class WelcomeActivity extends AppCompatActivity implements AdapterView.On
         editText.setWidth(500);
 
         final SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        final SharedPreferences mainPreference = PreferenceManager.getDefaultSharedPreferences(WelcomeActivity.this);
+
         boolean isSetServer = preferences.getBoolean("isSetServer", false);
         if(!isSetServer) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -92,6 +94,7 @@ public class WelcomeActivity extends AppCompatActivity implements AdapterView.On
                         public void onClick(DialogInterface dialog, int which) {
                             MainActivity.SERVER_URL = editText.getText().toString();
                             preferences.edit().putBoolean("isSetServer", true).apply();
+                            mainPreference.edit().putString("serverURL", MainActivity.SERVER_URL).apply();
                         }
                     })
                     .setNegativeButton("我就看看，不说话", null);

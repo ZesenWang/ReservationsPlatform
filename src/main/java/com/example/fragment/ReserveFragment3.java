@@ -143,8 +143,12 @@ public class ReserveFragment3 extends Fragment implements View.OnClickListener{
                             dialog.dismiss();
                             try {
                                 if(result == null || !result.getBoolean("isSucceed")){
-                                    Toast.makeText(activity, "当前不是挂号时间！", Toast.LENGTH_SHORT).show();
-
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(activity, "当前不是挂号时间！", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                     Intent backToMain = new Intent(getActivity(),MainActivity.class);
                                     startActivity(backToMain);
                                     return;
@@ -158,6 +162,7 @@ public class ReserveFragment3 extends Fragment implements View.OnClickListener{
                                 editor.putInt("peopleCount",peopleCount);
                                 editor.putString("doctor",doctorArray[activity.reservationInfo.getInt("doctor")]);
                                 editor.putBoolean("isReserveSucceed", true);
+                                editor.putBoolean("isCancel",false);
                                 editor.apply();
                                 //// TODO: 2016/12/23  
                                 handler.post(new Runnable() {

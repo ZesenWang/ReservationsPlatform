@@ -8,13 +8,16 @@ import android.app.FragmentManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
@@ -23,6 +26,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
@@ -40,6 +44,7 @@ import com.example.fragment.Tab1Fragment;
 import com.example.fragment.Tab2Fragment;
 import com.example.fragment.Tab3Fragment;
 import com.example.fragment.Tab4Fragment;
+import com.example.service.CheckBindingService;
 import com.example.service.CheckIntentService;
 import com.example.service.CheckService;
 import com.example.utils.ImageHelper;
@@ -63,16 +68,75 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     MapView mapView;
     boolean isSignIn;
     SharedPreferences preferences;
-    PendingIntent pendingIntent;
-    AlarmManager manager;
     public ImageHelper imageHelper;
     Intent intent;
+    CheckBindingService.MyBinder binder;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             //super.handleMessage(msg);
-            startService(intent);
+            //startService(intent);
+            Log.i(TAG, "handleMessage: ");
+            //bindService(intent, conn, Service.BIND_AUTO_CREATE);
+            binder.checkoutInService();
             handler.sendEmptyMessageDelayed(0x123, 3000);
+        }
+    };
+    ServiceConnection conn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            binder = (CheckBindingService.MyBinder)service;
+            binder.setUIOperations(operations);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+    CheckBindingService.UIOperations operations = new CheckBindingService.UIOperations() {
+        @Override
+        public void resetUI() {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(MainActivity.this, "取消挂号成功或者当前号码已被处理", Toast.LENGTH_SHORT).show();
+                    //如果tab4还没有被用户点击过，也就是控件目前都为null，就不操作UI
+                    if(tab4Fragment.waitTime == null)
+                        return;
+                    tab4Fragment.waitTime.setText("预计排队时间\n\n分钟");
+                    tab4Fragment.peopleNumber.setText("");
+                    tab4Fragment.queueNumber.setText("你的排队号码\n\n");
+                    tab4Fragment.reservationType.setText("你的挂号类型\n\n");
+                }
+            });
+        }
+
+        @Override
+        public void updateUI() {
+            //如果tab4还没有被用户点击过，也就是控件目前都为null，就不操作UI
+            if(tab4Fragment.waitTime == null)
+                return;
+
+            //更新UI, 好像每次启动新线程之后，即使线程结束了，代码还是跑在新线程
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    //String []doctor = getResources().getStringArray(R.array.doctor_names);
+                    //String msg = intent.getStringExtra("msg");
+                    SharedPreferences preferences = getSharedPreferences("waitInfo",MODE_PRIVATE);
+                    //从共享首选项里取出要显示的数据
+                    int waitTime = preferences.getInt("waitTime",-1);
+                    int peopleNumber = preferences.getInt("peopleNumber", -1);
+                    int queueNumber = preferences.getInt("queueNumber", -1);
+                    String doctor = preferences.getString("doctor", "");
+
+                    tab4Fragment.waitTime.setText("预计排队时间\n\n"+waitTime+"分钟");
+                    tab4Fragment.peopleNumber.setText(""+peopleNumber);
+                    tab4Fragment.queueNumber.setText("你的排队号码\n\n"+queueNumber);
+                    tab4Fragment.reservationType.setText("你的挂号类型\n\n"+doctor);
+                }
+            });
         }
     };
     @Override
@@ -97,15 +161,21 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             Intent intent = new Intent(this, WelcomeActivity.class);
             startActivityForResult(intent, 0);
         }
+        //当用户第二次打开app时(第一次打开时这里返回“”，因为还没有设置过)，
+        // 取出SERVER_URL的值，在注册、挂号、检查时会使用
         SERVER_URL = preferences.getString("serverURL", "");
         //获取位置信息和附近的医院信息
         requestPOI();
         new MyLocation(this, tab1Fragment);
-        //启动一个定时执行的service，用于检查挂号信息
-        intent = new Intent(this, CheckIntentService.class);
+        //启动一个定时执行的service，用于检查挂号信息,因为广播接收者不能写成内部类，所以这个方法不行
+        //intent = new Intent(this, CheckIntentService.class);
         //pendingIntent = PendingIntent.getService(this, 0, intent, 0);
         //manager = (AlarmManager)getSystemService(Service.ALARM_SERVICE);
-        handler.sendEmptyMessageDelayed(0x123, 5000);
+        //handler.sendEmptyMessageDelayed(0x123, 5000);
+        //启动一个bound类型的service，可以与activity通信
+        intent = new Intent(MainActivity.this, CheckBindingService.class);
+        bindService(intent, conn, Service.BIND_AUTO_CREATE);
+        handler.sendEmptyMessageDelayed(0x123, 3000);
     }
     public void requestPOI(){
         poiSearch = PoiSearch.newInstance();
@@ -132,6 +202,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+        handler.removeMessages(0x123);
+        unbindService(conn);
     }
 
     OnGetPoiSearchResultListener poiListener = new OnGetPoiSearchResultListener() {

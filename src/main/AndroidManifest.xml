@@ -104,6 +104,7 @@
             android:enabled="true"
             android:exported="false"></service>
         <service android:name="com.example.service.CheckIntentService"/>
+        <service android:name="com.example.service.CheckBindingService"/>
         <receiver android:name="com.example.broadcast.ActivityReceiver">
             <intent-filter>
                 <action android:name="com.example.action.UPDATE_UI"/>

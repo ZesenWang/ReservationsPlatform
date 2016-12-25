@@ -36,6 +36,10 @@
         <Preference
             android:title="关于我们"
             android:summary="不接受任何建议"/>
+        <EditTextPreference
+            android:title="修改服务器地址"
+            android:summary="会立即生效"
+            android:key="serverURL"/>
     </PreferenceCategory>
     <com.example.utils.SignOutPreference
         android:title="退出登陆"

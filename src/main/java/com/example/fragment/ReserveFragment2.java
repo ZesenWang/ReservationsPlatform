@@ -98,12 +98,17 @@ public class ReserveFragment2 extends Fragment implements AdapterView.OnItemClic
                             dialog.dismiss();
                             try {
                                 if(result == null || !result.getBoolean("isSucceed")){
-                                    Toast.makeText(activity, "当前不是挂号时间！", Toast.LENGTH_SHORT).show();
-
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(activity, "当前不是挂号时间！", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                     Intent backToMain = new Intent(getActivity(),MainActivity.class);
                                     startActivity(backToMain);
                                     return;
                                 }
+                                //继续执行这里代码表示挂号成功
                                 int waitTime = result.getInt("waitTime");
                                 int peopleCount = result.getInt("peopleCount");
 
@@ -113,6 +118,7 @@ public class ReserveFragment2 extends Fragment implements AdapterView.OnItemClic
                                 editor.putInt("peopleCount",peopleCount);
                                 editor.putString("doctor",doctorArray[activity.reservationInfo.getInt("doctor")]);
                                 editor.putBoolean("isReserveSucceed", true);
+                                editor.putBoolean("isCancel",false);
                                 editor.apply();
 
                                 handler.post(new Runnable() {

@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.dentalhospital.R;
+import com.example.service.CheckBindingService;
+import com.example.service.CheckIntentService;
 import com.example.service.CheckService;
 import com.example.utils.RingProgressBar;
 
@@ -66,7 +68,7 @@ public class Tab4Fragment extends Fragment {
             SharedPreferences.Editor editor = getActivity().getSharedPreferences("waitInfo", Context.MODE_PRIVATE).edit();
             editor.putBoolean("isCancel",true).apply();
 
-            Intent intent = new Intent(getActivity(), CheckService.class);
+            Intent intent = new Intent(getActivity(), CheckBindingService.class);
             getActivity().startService(intent);
 
             handler.sendEmptyMessageDelayed(0x123, 1500);
