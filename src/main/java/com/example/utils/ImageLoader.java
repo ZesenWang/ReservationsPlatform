@@ -15,7 +15,7 @@ import android.support.v4.util.LruCache;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.example.dentalhospital.R;
+import com.example.activity.R;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

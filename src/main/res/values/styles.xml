@@ -1,4 +1,12 @@
 <resources>
+    <!-- Splash Screen 主题 -->
+    <style name="AppSplashTheme" parent="@android:style/Theme.NoTitleBar">
+        <item name="android:windowBackground">@drawable/splash_image</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">

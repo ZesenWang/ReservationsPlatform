@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/relativeLayout"
     android:orientation="vertical"
-    tools:context="com.example.dentalhospital.MainActivity">
+    tools:context="com.example.activity.com.example.main.MainActivity">
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"

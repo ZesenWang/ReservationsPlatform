@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dentalhospital">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.activity">
+
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <!-- 这个权限用于进行网络定位 -->
@@ -31,23 +31,39 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
+        android:name="com.example.application.InitApplication"
         android:allowBackup="true"
         android:icon="@drawable/hospital"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:launchMode="singleTask">
+            android:name="com.example.login.SplashActivity"
+            android:theme="@style/AppSplashTheme"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="com.tradingreason.ftt"
+                    android:scheme="tradingreason" />
+            </intent-filter>
         </activity>
-        <activity android:name=".HospitalDetailsActivity">
+        <activity
+            android:name="com.example.main.MainActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name="com.example.hospitaldetail.HospitalDetailsActivity">
             <intent-filter>
                 <action android:name="com.example.dentalhospital.HospitalDetails" />
 
@@ -55,7 +71,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WelcomeActivity"
+            android:name="com.example.login.WelcomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.Welcome" />
@@ -65,7 +81,7 @@
                 <data android:scheme="tencent101367274" />
             </intent-filter>
         </activity>
-        <activity android:name=".ReserveActivity">
+        <activity android:name="com.example.reserve.ReserveActivity">
             <intent-filter>
                 <action android:name="android.intent.action.ReserveActivity" />
 
@@ -93,7 +109,7 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
+            android:process=":remote" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -102,15 +118,19 @@
         <service
             android:name="com.example.service.CheckService"
             android:enabled="true"
-            android:exported="false"></service>
-        <service android:name="com.example.service.CheckIntentService"/>
-        <service android:name="com.example.service.CheckBindingService"/>
+            android:exported="false" />
+        <service android:name="com.example.service.CheckIntentService" />
+        <service android:name="com.example.service.CheckBindingService" />
+
         <receiver android:name="com.example.broadcast.ActivityReceiver">
             <intent-filter>
-                <action android:name="com.example.action.UPDATE_UI"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="com.example.action.UPDATE_UI" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+
+        <activity android:name="com.example.reserve.DoctorActivity"></activity>
     </application>
 
 </manifest>

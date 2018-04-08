@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.dentalhospital.MainActivity;
+import com.example.main.MainActivity;
 import com.example.utils.JSONHelper;
 
 import org.json.JSONException;
@@ -31,8 +31,12 @@ public class CheckBindingService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         checkout();
+        //getBaseContext();
         return super.onStartCommand(intent, flags, startId);
     }
+
+
+
     public interface UIOperations{
         void resetUI();
         void updateUI();
@@ -46,10 +50,10 @@ public class CheckBindingService extends Service {
             this.operations = operations;
         }
     }
-
     public void checkout(){
         Log.i(TAG, "onStartCommand: service is running");
         final SharedPreferences preferences = getSharedPreferences("waitInfo", MODE_PRIVATE);
+        SharedPreferences userInfoPreference = PreferenceManager.getDefaultSharedPreferences(this);
 
         if(!preferences.getBoolean("isReserveSucceed", false)) {
             Log.i(TAG, "checkout: No reservation Quit checkout");
@@ -58,7 +62,7 @@ public class CheckBindingService extends Service {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("id", preferences.getString("sId", ""));
+            jsonObject.put("id", userInfoPreference.getString("sId", ""));
             jsonObject.put("isCancel", preferences.getBoolean("isCancel", false));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -74,7 +78,7 @@ public class CheckBindingService extends Service {
                 try {
                     int queueNumber = result.getInt("queueNumber");
                     int waitTime = result.getInt("waitTime");
-                    int peopleNumber = result.getInt("peopleNumber");
+                    int peopleCount = result.getInt("peopleCount");
                     if(queueNumber == -1){
                         Log.i(TAG, "onReceive: queueNumber=-1");
                         SharedPreferences.Editor editor = preferences.edit();
@@ -82,7 +86,7 @@ public class CheckBindingService extends Service {
                         editor.putBoolean("isCancel", false);
                         editor.putInt("queueNumber",-1);
                         editor.putInt("waitTime", -1);
-                        editor.putInt("peopleNumber", -1);
+                        editor.putInt("peopleCount", -1);
                         editor.commit();
                         //使用intent发送广播，放弃的方法
                         //intent.putExtra("msg","reset");
@@ -94,7 +98,7 @@ public class CheckBindingService extends Service {
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putInt("queueNumber", queueNumber);
                         editor.putInt("waitTime", waitTime);
-                        editor.putInt("peopleNumber", peopleNumber);
+                        editor.putInt("peopleCount", peopleCount);
                         editor.commit();
                         //使用intent发送广播，放弃的方法
                         //intent.putExtra("msg","update");

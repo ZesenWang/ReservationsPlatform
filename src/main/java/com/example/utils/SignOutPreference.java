@@ -6,11 +6,9 @@ import android.content.SharedPreferences;
 import android.preference.DialogPreference;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.widget.TextView;
 
-import com.example.dentalhospital.R;
-import com.example.dentalhospital.WelcomeActivity;
+import com.example.login.WelcomeActivity;
 
 /**
  * Created by wangz on 2016/12/13.

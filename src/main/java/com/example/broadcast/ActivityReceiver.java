@@ -3,14 +3,7 @@ package com.example.broadcast;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
-
-import com.example.dentalhospital.MainActivity;
-import com.example.dentalhospital.R;
-import com.example.service.CheckIntentService;
 
 public class ActivityReceiver extends BroadcastReceiver {
     private static final String TAG = "ActivityReceiver";

@@ -4,19 +4,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.util.TypedValue;
 import android.widget.Button;
 
-import com.example.dentalhospital.R;
+import com.example.activity.R;
 
 /**
  * Created by wangz on 2016/8/12.
  */
-public class TabButton extends Button {
+public class TabButton extends android.support.v7.widget.AppCompatButton {
 
     public Paint paint;
     public Bitmap bitmap;
@@ -41,7 +38,7 @@ public class TabButton extends Button {
     }
 
     public TabButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+        super(context, attrs, defStyleAttr);
         init();
     }
 

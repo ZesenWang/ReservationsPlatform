@@ -1,13 +1,17 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 25
+    buildToolsVersion '27.0.3'
+
+    dataBinding {
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "com.example.dentalhospital"
         minSdkVersion 21
-        targetSdkVersion 24
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -21,15 +25,29 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.1.1'
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/baidumapapi_base_v4_0_0.jar')
     compile files('libs/baidumapapi_map_v4_0_0.jar')
     compile files('libs/baidumapapi_search_v4_0_0.jar')
     compile files('libs/baidumapapi_util_v4_0_0.jar')
-    compile 'com.android.support:design:24.2.1'
-    compile 'com.android.support:support-v4:24.1.1'
     compile files('libs/open_sdk_r5756.jar')
     compile files('libs/mta-sdk-1.6.2.jar')
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.google.code.gson:gson:2.8.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.android.support:appcompat-v7:25.3.1'
+    implementation 'com.android.support:recyclerview-v7:25.3.1'
+    implementation 'com.facebook.fresco:fresco:1.5.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:1.1.0"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
 }

@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.dentalhospital.MainActivity;
+import com.example.main.MainActivity;
 import com.example.utils.JSONHelper;
 
 import org.json.JSONException;

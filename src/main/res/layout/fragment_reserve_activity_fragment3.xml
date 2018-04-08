@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/relativeLayout">
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="105dp"
+        android:layout_height="160dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="25dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/chenyue" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageView12"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/imageView12"
+        android:text="陈悦"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/textView"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/textView"
+        android:text="女" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:text="所属医院："
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@id/textView"
+        android:id="@+id/textView3"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3"
+        android:text="杭州口腔医院"
+        android:textSize="15sp" />
+    <TextView
+        android:layout_marginTop="15dp"
+        android:text="职        称："
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_alignLeft="@id/textView3"
+        android:id="@+id/textView4"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/textView6"
+        android:layout_alignTop="@id/textView4"
+        android:text="主治医师"
+        android:textSize="15sp" />
+    <TextView
+        android:layout_marginTop="15dp"
+        android:text="坐诊科室："
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:layout_alignLeft="@id/textView4"
+        android:id="@+id/textView5"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/textView5"
+        android:layout_toRightOf="@id/textView5"
+        android:text="洁牙美牙中心"
+        android:textSize="15sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/centerMark"
+        android:layout_centerHorizontal="true"/>
+    <Button
+        android:layout_marginTop="15dp"
+        android:background="@drawable/left_button_checked"
+        android:text="医生排班"
+        android:textColor="#ffffff"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/centerMark"
+        android:layout_below="@id/imageView12"
+        android:id="@+id/button9" />
+    <Button
+        android:layout_marginTop="15dp"
+        android:background="@drawable/right_button_unchecked"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/centerMark"
+        android:layout_below="@id/imageView12"
+        android:id="@+id/button10"
+        android:text="医生详情"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="match_parent"
+        android:layout_below="@id/button9"
+        android:id="@+id/dynamicContainer"
+        ></LinearLayout>
+</RelativeLayout>

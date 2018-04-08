@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="match_parent"
+    android:padding="5dp"
+    android:background="#fff">
+
+    <ImageView
+        android:layout_marginRight="5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/account"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:lines="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="协和口腔医院"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imageView2" />
+
+    <TextView
+        android:text="距离我的位置：100米"
+        android:id="@+id/textView3"
+        android:layout_toRightOf="@id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/imageView2"/>
+
+    <RatingBar
+        android:isIndicator="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/imageView2"
+        android:layout_above="@id/textView3"
+        android:layout_below="@id/textView2"
+        android:id="@+id/ratingBar" />
+</RelativeLayout>

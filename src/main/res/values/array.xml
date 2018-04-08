@@ -24,7 +24,7 @@
         <item>2</item>
         <item>3</item>
     </string-array>
-    <string-array name="department">
+    <!--<string-array name="department">
         <item>中医科</item>
         <item>中西医结合科</item>
         <item>外科</item>
@@ -45,5 +45,20 @@
         <item>专家号-陈培丰</item>
         <item>专家号-李虹</item>
         <item>专家号-江依法</item>
+    </string-array>-->
+    <string-array name="department">
+        <item>洁牙美牙中心</item>
+        <item>口腔儿科</item>
+        <item>口腔外科</item>
+        <item>口腔修复科</item>
+        <item>口腔种植中心</item>
+        <item>口腔综合科</item>
+    </string-array>
+    <string-array name="doctor_names">
+        <item>普通号</item>
+        <item>专家号-唐艳</item>
+        <item>专家号-李岩</item>
+        <item>专家号-陈悦</item>
+        <item>专家号-李娇</item>
     </string-array>
 </resources>

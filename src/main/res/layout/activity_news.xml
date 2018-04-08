@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_height="wrap_content"
+            android:layout_width="1080px"
+            fresco:viewAspectRatio="1.7"
+            fresco:placeholderImage="@drawable/news_1"
+            fresco:placeholderImageScaleType="fitXY"/>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_height="wrap_content"
+            android:layout_width="1080px"
+            fresco:viewAspectRatio="1.7"
+            fresco:placeholderImage="@drawable/news_2"
+            fresco:placeholderImageScaleType="fitXY"/>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_height="wrap_content"
+            android:layout_width="1080px"
+            fresco:viewAspectRatio="1.7"
+            fresco:placeholderImage="@drawable/news_3"
+            fresco:placeholderImageScaleType="fitXY"/>
+</LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:id="@+id/buttonGroup"
+        android:background="#fff"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center"
+            android:onClick="onClickReservation"
+            android:text="预约情况"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:gravity="center"
+            android:onClick="onClickNews"
+            android:text="行业资讯"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:gravity="center"
+            android:onClick="onClickNote"
+            android:text="备忘录"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:background="#000"
+        android:layout_above="@id/buttonGroup"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    </RelativeLayout>

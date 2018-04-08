@@ -7,9 +7,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.dentalhospital.MainActivity;
-import com.example.dentalhospital.R;
-import com.example.fragment.Tab4Fragment;
+import com.example.main.MainActivity;
 import com.example.utils.JSONHelper;
 
 import org.json.JSONException;

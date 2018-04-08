@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:clickable="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:titleTextColor="#fff"
+        android:layout_height="wrap_content"></android.support.v7.widget.Toolbar>
+    <GridView
+        android:numColumns="3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gridView"
+        android:layout_below="@id/toolBar"></GridView>
+    <FrameLayout
+        android:layout_below="@id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <GridView
+            android:padding="10dp"
+            android:background="#addd"
+            android:verticalSpacing="10dp"
+            android:layout_below="@id/gridView"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/gridView2"
+            android:numColumns="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </GridView>
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/gridView"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请下拉刷新"
+            android:id="@+id/refresh"/>
+    </FrameLayout>
+</RelativeLayout>

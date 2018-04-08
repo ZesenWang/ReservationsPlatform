@@ -6,8 +6,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.model.LatLng;
-import com.example.fragment.Tab1Fragment;
+import com.example.main.fragment.Tab1Fragment;
 
 /**
  * Created by wangz on 2016/11/18.
@@ -43,6 +42,7 @@ public class MyLocation {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
             tab1Fragment.setBDLocation(bdLocation);
+            location = bdLocation;
             mLocationClient.stop();
         }
     }
