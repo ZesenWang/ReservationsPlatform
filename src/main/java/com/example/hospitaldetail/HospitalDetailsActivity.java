@@ -9,8 +9,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toolbar;
 
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.SDKInitializer;
@@ -34,7 +32,7 @@ import com.example.reserve.ReserveActivity;
  * Created by wangz on 2016/10/23.
  */
 
-public class HospitalDetailsActivity extends AppCompatActivity implements HDView {
+public class HospitalDetailsActivity extends AppCompatActivity implements HospitalDetailView {
 
     private static final String TAG = "ReservationApp";
 
@@ -42,7 +40,7 @@ public class HospitalDetailsActivity extends AppCompatActivity implements HDView
     private BaiduMap mBaiduMap;
     private LatLng mLatLng;
     private ActionBar mActionBar;
-    private HDViewModel mModel;
+    private HospitalDetailViewModel mModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +48,7 @@ public class HospitalDetailsActivity extends AppCompatActivity implements HDView
         SDKInitializer.initialize(getApplicationContext());
 
         // 初始化ViewModel
-        mModel = new HDViewModel(getIntent().getExtras(), this);
+        mModel = new HospitalDetailViewModel(getIntent().getExtras(), this);
         ActivityHospitalDetailsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_hospital_details);
         binding.setI(mModel);
 

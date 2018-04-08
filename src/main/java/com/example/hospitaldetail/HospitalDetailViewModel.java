@@ -5,17 +5,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class HDViewModel {
+public class HospitalDetailViewModel {
     private Bundle mData;
-    private HDView mHDView;
+    private HospitalDetailView mHospitalDetailView;
 
     public ObservableField<String> hospitalName = new ObservableField<>();
     public ObservableField<String> hospitalPhoneNumber = new ObservableField<>();
     public ObservableField<String> hospitalAddress = new ObservableField<>();
 
-    public HDViewModel(Bundle data, HDView hdView) {
+    public HospitalDetailViewModel(Bundle data, HospitalDetailView hospitalDetailView) {
         this.mData = data;
-        mHDView = hdView;
+        mHospitalDetailView = hospitalDetailView;
         hospitalName.set(mData.getString("name"));
         hospitalAddress.set(mData.getString("address"));
         hospitalPhoneNumber.set(mData.getString("phoneNum"));
@@ -23,14 +23,14 @@ public class HDViewModel {
 
     public void onPhoneNumberClick(View view) {
         TextView textView = (TextView) view;
-        mHDView.dialPhoneNumber(textView.getText().toString());
+        mHospitalDetailView.dialPhoneNumber(textView.getText().toString());
     }
 
     public void onAddressClick() {
-        mHDView.startBaiduMap();
+        mHospitalDetailView.startBaiduMap();
     }
 
     public void onReserveClick() {
-        mHDView.goToReserveActivity();
+        mHospitalDetailView.goToReserveActivity();
     }
 }
